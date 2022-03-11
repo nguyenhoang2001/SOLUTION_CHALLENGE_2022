@@ -4,7 +4,7 @@ import 'package:solution_challenge_2022/views/explore/explore.dart';
 import 'package:solution_challenge_2022/views/home/home.dart';
 import 'package:solution_challenge_2022/views/settings/settings.dart';
 import 'package:flutter_icons/flutter_icons.dart';
-import 'package:solution_challenge_2022/views/userInfo/UserInfo.dart';
+
 import 'package:solution_challenge_2022/views/videos/Videos.dart';
 
 import 'camera/Camera.dart';
@@ -28,7 +28,7 @@ class _MainScreenState extends State<MainScreen> {
           physics: NeverScrollableScrollPhysics(),
           controller: _pageController,
           onPageChanged: onPageChanged,
-          children: <Widget>[Camera(), Videos(), Explore(), Feed(), Profile()],
+          children: <Widget>[Camera(), Videos(), Home(), Feed(), Profile()],
         ),
         bottomNavigationBar: BottomNavigationBar(
           backgroundColor: Theme.of(context).primaryColor,
