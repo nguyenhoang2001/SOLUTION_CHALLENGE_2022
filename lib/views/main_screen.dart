@@ -28,7 +28,7 @@ class _MainScreenState extends State<MainScreen> {
           physics: NeverScrollableScrollPhysics(),
           controller: _pageController,
           onPageChanged: onPageChanged,
-          children: <Widget>[Camera(), Videos(), Home(), Explore(), Feed(), UserInfo(),Profile()],
+          children: <Widget>[Camera(), Videos(), Explore(), Feed(), Profile()],
         ),
         bottomNavigationBar: BottomNavigationBar(
           backgroundColor: Theme.of(context).primaryColor,
@@ -43,11 +43,7 @@ class _MainScreenState extends State<MainScreen> {
             ),
             BottomNavigationBarItem(
               icon: Icon(Feather.video),
-              label: 'Video',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Feather.home),
-              label: 'Home',
+              label: 'Videos',
             ),
             BottomNavigationBarItem(
               icon: Icon(Feather.book_open),
@@ -56,10 +52,6 @@ class _MainScreenState extends State<MainScreen> {
             BottomNavigationBarItem(
               icon: Icon(Feather.users),
               label: 'Feed',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Feather.user),
-              label: 'Info',
             ),
             BottomNavigationBarItem(
               icon: Icon(Feather.settings),
