@@ -4,6 +4,11 @@ import 'package:solution_challenge_2022/views/explore/explore.dart';
 import 'package:solution_challenge_2022/views/home/home.dart';
 import 'package:solution_challenge_2022/views/settings/settings.dart';
 import 'package:flutter_icons/flutter_icons.dart';
+import 'package:solution_challenge_2022/views/userInfo/UserInfo.dart';
+import 'package:solution_challenge_2022/views/videos/Videos.dart';
+
+import 'camera/Camera.dart';
+import 'feed/Feed.dart';
 
 class MainScreen extends StatefulWidget {
   @override
@@ -23,7 +28,7 @@ class _MainScreenState extends State<MainScreen> {
           physics: NeverScrollableScrollPhysics(),
           controller: _pageController,
           onPageChanged: onPageChanged,
-          children: <Widget>[Home(), Explore(), Profile()],
+          children: <Widget>[Camera(), Videos(), Home(), Explore(), Feed(), UserInfo(),Profile()],
         ),
         bottomNavigationBar: BottomNavigationBar(
           backgroundColor: Theme.of(context).primaryColor,
@@ -33,12 +38,28 @@ class _MainScreenState extends State<MainScreen> {
           type: BottomNavigationBarType.fixed,
           items: <BottomNavigationBarItem>[
             BottomNavigationBarItem(
+              icon: Icon(Feather.camera),
+              label: 'Camera',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Feather.video),
+              label: 'Video',
+            ),
+            BottomNavigationBarItem(
               icon: Icon(Feather.home),
               label: 'Home',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Feather.compass),
-              label: 'Explore',
+              icon: Icon(Feather.book_open),
+              label: 'Book',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Feather.users),
+              label: 'Feed',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Feather.user),
+              label: 'Info',
             ),
             BottomNavigationBarItem(
               icon: Icon(Feather.settings),
