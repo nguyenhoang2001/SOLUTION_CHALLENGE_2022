@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:solution_challenge_2022/components/body_builder.dart';
@@ -33,11 +35,14 @@ class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin {
           appBar: AppBar(
             centerTitle: true,
             title: Text(
-              '${Constants.appName}',
+              // '${Constants.appName}'
+              'Book',
               style: TextStyle(
-                fontSize: 20.0,
+                fontSize: 21.0,
+                fontWeight: FontWeight.bold,
               ),
             ),
+
           ),
           body: _buildBody(homeProvider),
         );
@@ -64,7 +69,7 @@ class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin {
           SizedBox(height: 10.0),
           _buildGenreSection(homeProvider),
           SizedBox(height: 20.0),
-          _buildSectionTitle('Recently Added'),
+          _buildSectionTitle('Recommended'),
           SizedBox(height: 20.0),
           _buildNewSection(homeProvider),
         ],
@@ -82,7 +87,7 @@ class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin {
             '$title',
             style: TextStyle(
               fontSize: 20.0,
-              fontWeight: FontWeight.w500,
+              fontWeight: FontWeight.bold,
             ),
           ),
         ],
@@ -133,19 +138,22 @@ class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin {
             if (index < 10) {
               return SizedBox();
             }
-
+            // // testing the sort of categories
+            // if(link.title != "Action & adventure") {
+            //   return SizedBox();
+            // }
             return Padding(
               padding: EdgeInsets.symmetric(horizontal: 5.0, vertical: 10.0),
               child: Container(
                 decoration: BoxDecoration(
                   color: Theme.of(context).accentColor,
                   borderRadius: BorderRadius.all(
-                    Radius.circular(20.0),
+                    Radius.circular(30.0),
                   ),
                 ),
                 child: InkWell(
                   borderRadius: BorderRadius.all(
-                    Radius.circular(20.0),
+                    Radius.circular(1.0),
                   ),
                   onTap: () {
                     MyRouter.pushPage(
@@ -185,7 +193,16 @@ class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin {
       itemCount: homeProvider.recent.feed?.entry?.length ?? 0,
       itemBuilder: (BuildContext context, int index) {
         Entry entry = homeProvider.recent.feed!.entry![index];
-
+        bool pass = false;
+        for(int i = 0; i < entry.category!.length; i++) {
+          if(entry.category![i].label == "19th century") {
+            pass = true;
+            break;
+          }
+        }
+        if(pass == false) {
+          return SizedBox();
+        }
         return Padding(
           padding: EdgeInsets.symmetric(horizontal: 5.0, vertical: 5.0),
           child: BookListItem(

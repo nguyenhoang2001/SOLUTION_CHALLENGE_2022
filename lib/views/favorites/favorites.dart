@@ -43,6 +43,9 @@ class _FavoritesState extends State<Favorites> {
             centerTitle: true,
             title: Text(
               'Favorites',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ),
           body: favoritesProvider.posts.isEmpty

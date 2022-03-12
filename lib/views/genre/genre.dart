@@ -38,7 +38,11 @@ class _GenreState extends State<Genre> {
         return Scaffold(
           appBar: AppBar(
             centerTitle: true,
-            title: Text('${widget.title}'),
+            title: Text('${widget.title}',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+              ),
+            ),
           ),
           body: _buildBody(provider),
         );
