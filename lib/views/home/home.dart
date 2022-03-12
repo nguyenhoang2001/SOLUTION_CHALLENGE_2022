@@ -30,16 +30,28 @@ class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin {
     return Consumer<HomeProvider>(
       builder: (BuildContext context, HomeProvider homeProvider, Widget? child) {
         return Scaffold(
-          appBar: AppBar(
-            centerTitle: true,
-            title: Text(
-              '${Constants.appName}',
-              style: TextStyle(
-                fontSize: 20.0,
-              ),
-            ),
+          // appBar: AppBar(
+          //   centerTitle: true,
+          //   backgroundColor: Theme.of(context).primaryColor,
+          //   title: Text(
+          //     '${Constants.appName}',
+          //     style: TextStyle(
+          //       fontSize: 20.0,
+          //     ),
+          //   ),
+          // ),
+          body: NestedScrollView(
+            floatHeaderSlivers: true,
+            headerSliverBuilder: (context, innerBoxIsScrolled) => [
+              SliverAppBar(
+                backgroundColor: Theme.of(context).primaryColor,
+                floating: true,
+                title: Text('Books'),
+                centerTitle: true,
+              )
+            ],
+            body: _buildBody(homeProvider),
           ),
-          body: _buildBody(homeProvider),
         );
       },
     );

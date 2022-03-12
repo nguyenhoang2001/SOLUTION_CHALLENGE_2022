@@ -53,6 +53,7 @@ class _DetailsState extends State<Details> {
           Widget? child) {
         return Scaffold(
           appBar: AppBar(
+            backgroundColor: Theme.of(context).primaryColor,
             actions: <Widget>[
               IconButton(
                 onPressed: () async {
