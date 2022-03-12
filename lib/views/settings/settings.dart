@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:solution_challenge_2022/theme/theme_config.dart';
 import 'package:solution_challenge_2022/util/router.dart';
@@ -6,6 +8,7 @@ import 'package:solution_challenge_2022/views/downloads/downloads.dart';
 import 'package:solution_challenge_2022/views/favorites/favorites.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:provider/provider.dart';
+import 'package:solution_challenge_2022/views/userInfo/UserInfo.dart';
 
 class Profile extends StatefulWidget {
   @override
@@ -41,8 +44,8 @@ class _ProfileState extends State<Profile> {
       },
       {
         'icon': Feather.file_text,
-        'title': 'Licenses',
-        'function': () => _pushPageDialog(LicensePage()),
+        'title': 'Info',
+        'function': () => _pushPage(UserInfo()),
       },
     ];
   }
@@ -60,6 +63,9 @@ class _ProfileState extends State<Profile> {
         backgroundColor: Theme.of(context).primaryColor,
         title: Text(
           'Settings',
+          style: TextStyle(
+            fontWeight: FontWeight.bold
+          ),
         ),
       ),
       body: ListView.separated(
@@ -79,6 +85,9 @@ class _ProfileState extends State<Profile> {
             ),
             title: Text(
               items[index]['title'],
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+              ),
             ),
           );
         },
@@ -96,6 +105,9 @@ class _ProfileState extends State<Profile> {
       ),
       title: Text(
         item['title'],
+        style: TextStyle(
+          fontWeight: FontWeight.bold,
+        ),
       ),
       value: Provider.of<AppProvider>(context).theme == ThemeConfig.lightTheme
           ? false
@@ -129,7 +141,7 @@ class _ProfileState extends State<Profile> {
             'About',
           ),
           content: Text(
-            'Simple eBook app by JideGuru',
+            'Designed by hooray',
           ),
           actions: <Widget>[
             FlatButton(
