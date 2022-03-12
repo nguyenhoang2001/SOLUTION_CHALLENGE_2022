@@ -32,17 +32,6 @@ class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin {
     return Consumer<HomeProvider>(
       builder: (BuildContext context, HomeProvider homeProvider, Widget? child) {
         return Scaffold(
-// <<<<<<< HEAD
-          // appBar: AppBar(
-          //   centerTitle: true,
-          //   backgroundColor: Theme.of(context).primaryColor,
-          //   title: Text(
-          //     '${Constants.appName}',
-          //     style: TextStyle(
-          //       fontSize: 20.0,
-          //     ),
-          //   ),
-          // ),
           body: NestedScrollView(
             floatHeaderSlivers: true,
             headerSliverBuilder: (context, innerBoxIsScrolled) => [
@@ -59,19 +48,6 @@ class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin {
               )
             ],
             body: _buildBody(homeProvider),
-// =======
-//           appBar: AppBar(
-//             centerTitle: true,
-//             title: Text(
-//               // '${Constants.appName}'
-//               'Book',
-//               style: TextStyle(
-//                 fontSize: 21.0,
-//                 fontWeight: FontWeight.bold,
-//               ),
-//             ),
-//
-// >>>>>>> 5b2fa77b80e4ab7abefb8ef6a1f86a853946eb2a
           ),
         );
       },
