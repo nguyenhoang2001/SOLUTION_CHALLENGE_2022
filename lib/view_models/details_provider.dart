@@ -96,9 +96,9 @@ class DetailsProvider extends ChangeNotifier {
 
   Future downloadFile(BuildContext context, String url, String filename) async {
     PermissionStatus permission = await Permission.storage.status;
-    print("I came to download file");
+
     if (permission != PermissionStatus.granted) {
-      print("I exit the awaits");
+
       await Permission.storage.request();
       // access media location needed for android 10/Q
       await Permission.accessMediaLocation.request();
@@ -107,14 +107,13 @@ class DetailsProvider extends ChangeNotifier {
 
       startDownload(context, url, filename);
     } else {
-      print("I came to start download");
+
       startDownload(context, url, filename);
     }
   }
 
   startDownload(BuildContext context, String url, String filename) async {
-    print('The url: $url' );
-    print('The filename: $filename' );
+
     Directory? appDocDir = Platform.isAndroid
         ? await getExternalStorageDirectory()
         : await getApplicationDocumentsDirectory();
