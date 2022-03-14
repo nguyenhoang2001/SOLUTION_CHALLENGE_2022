@@ -28,8 +28,8 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   cached_network_image: ^3.1.0
-  dio: ^4.0.0
-  epub_viewer: ^0.2.2
+  dio: ^4.0.4
+  epub_viewer: ^0.2.5
   flutter:
     sdk: flutter
   flutter_icons:
@@ -40,11 +40,11 @@ dependencies:
   objectdb: ^1.2.1+1
   path_provider: ^2.0.3
   permission_handler: ^8.1.6
-  provider: ^6.0.0
+  provider: ^6.0.2
   share: 2.0.4
   shared_preferences: ^2.0.7
   uuid: ^3.0.4
-  xml2json: ^5.3.1
+  xml2json: ^5.3.2
 
   curved_navigation_bar: ^1.0.1
 
