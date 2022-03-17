@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:objectdb/objectdb.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:objectdb/src/objectdb_storage_filesystem.dart';
@@ -26,11 +25,11 @@ class DownloadsDB {
     return val;
   }
 
-  Future removeAllWithId(Map item) async {
+  Future<void> removeAllWithId(Map item) async {
     final db = ObjectDB(FileSystemStorage(await getPath()));
     List val = await db.find({});
     val.forEach((element) {
-      db.remove(element);
+      db.remove(item);
     });
     await db.close();
   }

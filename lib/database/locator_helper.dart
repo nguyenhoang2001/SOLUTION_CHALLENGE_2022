@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:objectdb/objectdb.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:objectdb/src/objectdb_storage_filesystem.dart';
@@ -8,6 +7,8 @@ class LocatorDB {
   getPath() async {
     Directory documentDirectory = await getApplicationDocumentsDirectory();
     final path = documentDirectory.path + '/locator.db';
+    String pa = path.toString();
+    print('the path: '+ pa);
     return path;
   }
 
@@ -42,8 +43,11 @@ class LocatorDB {
   }
 
   Future<List> getLocator(String id) async {
+    print('work here: ' + id);
     final db = ObjectDB(FileSystemStorage(await getPath()));
-    List val = await db.find({'bookId': id});
+    print('The db: '+db.toString());
+
+    List val =  await db.find({'bookId': id});
     await db.close();
     return val;
   }

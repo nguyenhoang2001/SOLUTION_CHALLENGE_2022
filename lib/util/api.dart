@@ -18,8 +18,6 @@ class Api {
   static String mystery = '$publicDomainURL/top.atom?cat=FBFIC022000';
   static String romance = '$publicDomainURL/top.atom?cat=FBFIC027000';
   static String horror = '$publicDomainURL/top.atom?cat=FBFIC015000';
-  static String humor = '$publicDomainURL/recent.atom?cat=FBHUM000000';
-  static String humorous = '$publicDomainURL/recent.atom?cat=FBFIC016000';
 
   Future<CategoryFeed> getCategory(String url) async {
     var res = await dio.get(url).catchError((e) {
@@ -29,6 +27,7 @@ class Api {
     if (res.statusCode == 200) {
       Xml2Json xml2json = new Xml2Json();
       xml2json.parse(res.data.toString());
+
       var json = jsonDecode(xml2json.toGData());
       category = CategoryFeed.fromJson(json);
     } else {

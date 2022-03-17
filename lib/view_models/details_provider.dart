@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:solution_challenge_2022/components/download_alert.dart';
 import 'package:solution_challenge_2022/database/download_helper.dart';
 import 'package:solution_challenge_2022/database/favorite_helper.dart';
+import 'package:solution_challenge_2022/database/locator_helper.dart';
 import 'package:solution_challenge_2022/models/category.dart';
 import 'package:solution_challenge_2022/util/api.dart';
 import 'package:solution_challenge_2022/util/consts.dart';
@@ -190,6 +191,7 @@ class DetailsProvider extends ChangeNotifier {
   Entry? entry;
   var favDB = FavoriteDB();
   var dlDB = DownloadsDB();
+  var locator = LocatorDB();
 
   bool faved = false;
   bool downloaded = false;
@@ -249,12 +251,26 @@ class DetailsProvider extends ChangeNotifier {
 
   Future<List> getDownload() async {
     List c = await dlDB.check({'id': entry!.id!.t.toString()});
+
     return c;
   }
 
   addDownload(Map body) async {
     await dlDB.removeAllWithId({'id': entry!.id!.t.toString()});
+    String id = body['id'].toString();
+    String path = body['path'].toString();
+    String image = body['image'].toString();
+    String size = body['size'].toString();
+    String name = body['name'].toString();
+    print('the remove id: ' + entry!.id!.t.toString());
+    print(id);
+    print(path);
+    print(image);
+    print(size);
+    print(name);
     await dlDB.add(body);
+    // new added to locator
+    await locator.add(body);
     checkDownload();
   }
 
@@ -285,15 +301,13 @@ class DetailsProvider extends ChangeNotifier {
         ? await getExternalStorageDirectory()
         : await getApplicationDocumentsDirectory();
     if (Platform.isAndroid) {
-      Directory(appDocDir!.path.split('Android')[0] + '${Constants.appName}')
-          .createSync();
+      Directory(appDocDir!.path.split('Android')[0] + Constants.appName).createSync();
     }
 
-    String path = Platform.isIOS
-        ? appDocDir!.path + '/$filename.epub'
-        : appDocDir!.path.split('Android')[0] +
-        '${Constants.appName}/$filename.epub';
-    print(path);
+    String path = Platform.isIOS ? appDocDir!.path + '/$filename.epub' : appDocDir!.path.split('Android')[0] + '${Constants.appName}/$filename.epub';
+    print('the url: ' + url);
+    print('the filename: ' + filename);
+    print('the path: '+ path);
     File file = File(path);
     if (!await file.exists()) {
       await file.create();
