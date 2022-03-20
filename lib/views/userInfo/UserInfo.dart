@@ -3,6 +3,10 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+String? uid;
+void saveEmail(String email){
+  uid = email;
+}
 class UserInfo extends StatefulWidget {
   const UserInfo({Key? key}) : super(key: key);
 
