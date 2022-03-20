@@ -8,6 +8,7 @@ import 'package:solution_challenge_2022/views/explore/explore.dart';
 import 'package:solution_challenge_2022/views/home/home.dart';
 import 'package:solution_challenge_2022/views/settings/settings.dart';
 import 'package:flutter_icons/flutter_icons.dart';
+import 'package:solution_challenge_2022/views/threadworking/threadMain.dart';
 
 import 'package:solution_challenge_2022/views/videos/Videos.dart';
 
@@ -23,35 +24,36 @@ class MainScreen extends StatefulWidget {
   _MainScreenState createState() => _MainScreenState();
 }
 String? emailtopost;
-Future <void >myEmail(String email) async {
+void myEmail(String email)  {
   emailtopost = email;
 }
 
 class _MainScreenState extends State<MainScreen> {
-  late MyProfileData myData;
+  MyProfileData? myData;
   late PageController _pageController;
   bool _isLoading = false;
   int _page = 0;
   static String? realName;
+  var save_emailtopost = emailtopost;
 
   @override
   Widget build(BuildContext context) {
     final items = <Widget>[
-      Icon(Feather.camera, size:30, color: Colors.white),
-      Icon(Feather.video, size:30, color: Colors.white),
-      Icon(Feather.book_open, size:30, color: Colors.white),
-      Icon(Feather.users, size:30, color: Colors.white),
-      Icon(Feather.settings, size:30, color: Colors.white)
+      const Icon(Feather.camera, size:30, color: Colors.white),
+      const Icon(Feather.video, size:30, color: Colors.white),
+      const Icon(Feather.book_open, size:30, color: Colors.white),
+      const Icon(Feather.users, size:30, color: Colors.white),
+      const Icon(Feather.settings, size:30, color: Colors.white)
     ];
     return WillPopScope(
       onWillPop: () => Dialogs().showExitDialog(context),
       child: Scaffold(
         extendBody: true,
         body: PageView(
-          physics: NeverScrollableScrollPhysics(),
+          physics: const NeverScrollableScrollPhysics(),
           controller: _pageController,
           onPageChanged: onPageChanged,
-          children: <Widget>[Camera(), Videos(), Home(), Feed(), Profile()],
+          children: <Widget>[const Camera(), const Videos(), Home(), ThreadMain(myData: myData,updateMyData: updateMyData,), Profile()],
         ),
         bottomNavigationBar: CurvedNavigationBar(
           color: Theme.of(context).primaryColor,
@@ -59,33 +61,6 @@ class _MainScreenState extends State<MainScreen> {
           height: 55,
           backgroundColor: Colors.transparent,
 
-          // backgroundColor: Theme.of(context).primaryColor,
-          // selectedItemColor: Theme.of(context).accentColor,
-          // unselectedItemColor: Colors.grey[500],
-          // elevation: 20,
-          // type: BottomNavigationBarType.fixed,
-          // items: <BottomNavigationBarItem>[
-          //   BottomNavigationBarItem(
-          //     icon: Icon(Feather.camera),
-          //     label: 'Camera',
-          //   ),
-          //   BottomNavigationBarItem(
-          //     icon: Icon(Feather.video),
-          //     label: 'Videos',
-          //   ),
-          //   BottomNavigationBarItem(
-          //     icon: Icon(Feather.book_open),
-          //     label: 'Book',
-          //   ),
-          //   BottomNavigationBarItem(
-          //     icon: Icon(Feather.users),
-          //     label: 'Feed',
-          //   ),
-          //   BottomNavigationBarItem(
-          //     icon: Icon(Feather.settings),
-          //     label: 'Settings',
-          //   ),
-          // ],
           onTap: navigationTapped,
           index: _page,
         ),
@@ -99,27 +74,31 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   void initState() {
-    super.initState();
     FBCloudMessaging.instance.takeFCMTokenWhenAppLaunch();
     _pageController = PageController(initialPage: 0);
     setupMyName();
+    super.initState();
   }
-  Future<void>setupMyName() async{
-    CollectionReference collectionReference = FirebaseFirestore.instance.collection('Users').doc(emailtopost).collection('Profile');
-    collectionReference.snapshots().listen((snapshot) {
-      print(snapshot.docs[0]['Name'].toString());
-      realName = snapshot.docs[0]['Name'];
-      _takeMyData();
-    });
+void setupMyName() {
+    if(save_emailtopost != null) {
+      CollectionReference collectionReference = FirebaseFirestore.instance
+          .collection('Users').doc(save_emailtopost).collection('Profile');
+      collectionReference.snapshots().listen((snapshot) async {
+        print(snapshot.docs[0]['Name'].toString());
+        realName = snapshot.docs[0]['Name'];
+        takeMyData();
+      });
+    }
   }
 
-  Future<void> _takeMyData() async{
+void takeMyData() async {
+    print('came this');
     setState((){
       _isLoading = true;
     });
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String myThumbnail;
-    String? myName;
+    String myName;
     if (prefs.get('myThumbnail') == null) {
       String tempThumbnail = 'user.png';
       prefs.setString('myThumbnail',tempThumbnail);
@@ -132,22 +111,35 @@ class _MainScreenState extends State<MainScreen> {
       prefs.setString('myName',tempName);
       myName = tempName;
     }else{
-      myName = prefs.get('myName') as String?;}
+      myName = prefs.get('myName') as String;}
 
     if(myName != realName){
       String tempName = realName!;
       prefs.setString('myName',tempName);
       myName = tempName;
     }
+    // print('my name: ' + myName);
+    // print('my Thumbnail: ' + myThumbnail);
+    // print('my name: ' + (prefs.getString('FCMToken') as String ));
     setState(() {
       myData = MyProfileData(
         myThumbnail: myThumbnail,
-        myName: myName!,
-        myLikeList: prefs.getStringList('likeList')!,
-        myLikeCommnetList: prefs.getStringList('likeCommnetList')!,
-        myFCMToken: prefs.getString('FCMToken'),
+        myName: myName,
+        // myLikeList: prefs.getStringList('likeList'),
+        // myLikeCommnetList: prefs.getStringList('likeCommentList'),
+        myFCMToken: prefs.getString('FCMToken') as String, myLikeCommnetList: [], myLikeList: [],
       );
     });
+    // myData = MyProfileData(
+    //   myThumbnail: myThumbnail,
+    //   myName: myName,
+    //   // myLikeList: prefs.getStringList('likeList'),
+    //   // myLikeCommnetList: prefs.getStringList('likeCommentList'),
+    //   myFCMToken: prefs.getString('FCMToken') as String, myLikeCommnetList: [], myLikeList: [],
+    // );
+    // if(myData != null) {
+    //   print('myData is not null in the main_screeen');
+    // }
     setState(() {
       _isLoading = false;
     });

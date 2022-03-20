@@ -27,12 +27,15 @@ Future <bool> register(String email, String password) async{
     } else if (e.code == 'email-already-in-use') {
       print('The account already exists for that email.');
     }
-    return true;
+    return false;
   }
 }
-Future <bool> saveToFirebase(String email,String name,String dateofbirth, String phonenumber, String job) async {
+Future <void> saveToFirebase(String email,String name,String dateofbirth, String phonenumber, String job) async {
   try{
     String uid =Utils.getRandomString(8) + Random().nextInt(500).toString();
+    // DocumentReference documentReference = FirebaseFirestore.instance
+    //     .collection('Users')
+    //     .doc(email).collection('Profile').doc(uid);
     DocumentReference documentReference = FirebaseFirestore.instance
         .collection('Users')
         .doc(email).collection('Profile').doc(uid);
@@ -46,13 +49,13 @@ Future <bool> saveToFirebase(String email,String name,String dateofbirth, String
           "Phone number":phonenumber,
           "Job":job
         });
-        return true;
+        // return true;
       }
-      return true;
+      // return true;
     });
   } catch(e){
-    return false;
+    print(e.toString());
   }
-  return true;
+  // return true;
 }
 

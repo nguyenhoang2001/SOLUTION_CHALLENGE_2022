@@ -120,7 +120,7 @@ class _AuthenticationState extends State<Authentication> with TickerProviderStat
                         onPressed: () async {
                           bool shouldNavigate = await signin(_emailField.text,_passwordField.text);
                           if(shouldNavigate != false){
-                            await myEmail(_emailField.text);
+                            myEmail(_emailField.text);
                             saveEmail(_emailField.text);
                             Navigator.push(context,MaterialPageRoute(builder: (context) => MainScreen(),
                             ),

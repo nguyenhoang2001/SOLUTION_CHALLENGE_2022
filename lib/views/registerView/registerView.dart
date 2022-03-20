@@ -197,7 +197,7 @@ class _RegisterViewState extends State<RegisterView> {
                             );//navigate
                             saveToFirebase(_emailField.text,_userNameField.text,_dateofbirthField.text,_phonenumberField.text,_jobField.text);
                           }},
-                        child: Text("Register"),
+                        child: const Text("Register"),
                         textColor: Colors.white,
                       ),
                     ),

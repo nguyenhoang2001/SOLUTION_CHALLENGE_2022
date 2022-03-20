@@ -6,9 +6,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'FBCloudMessaging.dart';
 
 class FBCloudStore{
-  static Future<void> sendPostInFirebase(String postID,String postContent,MyProfileData userProfile,String postImageURL) async{
+  static Future<void> sendPostInFirebase(String postID,String postContent,MyProfileData? userProfile,String postImageURL) async{
     String? postFCMToken;
-    if(userProfile.myFCMToken == null){
+    if(userProfile!.myFCMToken == null){
       SharedPreferences prefs = await SharedPreferences.getInstance();
       postFCMToken = prefs.get('FCMToken') as String?;
     }else {
@@ -73,10 +73,10 @@ class FBCloudStore{
     // }
   }
 
-  static Future<void> commentToPost(String toUserID,String toCommentID,String postID,String commentContent,MyProfileData userProfile,String postFCMToken) async{
+  static Future<void> commentToPost(String toUserID,String toCommentID,String postID,String commentContent,MyProfileData? userProfile,String postFCMToken) async{
     String commentID = Utils.getRandomString(8) + Random().nextInt(500).toString();
     String? myFCMToken;
-    if(userProfile.myFCMToken == null){
+    if(userProfile!.myFCMToken == null){
       SharedPreferences prefs = await SharedPreferences.getInstance();
       myFCMToken = prefs.get('FCMToken') as String?;
     }else {

@@ -2,11 +2,11 @@ final List<String> iconImageList = ['assets/images/user.png'];
 const String firebaseCloudserverToken ='AAAABtQIKms:APA91bFQu5UgGdRy9FctBP5BcCoV-LYewUa7y2lhlFPDKvKEoRpSDGlCcCfTaB_DZt9RKSqoijGhjN9slgrbCYo1ApgJnpzMU8aijl25HD8uEtzsfXHhtU_CLLjXZLzlDA8WXmh4al86';
 const chars = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';
 class MyProfileData{
-  final String myThumbnail;
-  final String myName;
-  final List<String> myLikeList;
-  final List<String> myLikeCommnetList;
-  final String? myFCMToken;
+  String myThumbnail;
+  String myName;
+  List<String> myLikeList;
+  List<String> myLikeCommnetList;
+  String myFCMToken;
   MyProfileData({required this.myName,required this.myThumbnail,required this.myLikeList,required this.myLikeCommnetList,required this.myFCMToken});
 }
 
