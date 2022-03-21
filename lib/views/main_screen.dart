@@ -1,3 +1,4 @@
+import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:solution_challenge_2022/theme/theme_config.dart';
@@ -27,7 +28,6 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     final items = <Widget>[
       Icon(Feather.camera, size:30, color: Colors.white),
-      Icon(Feather.video, size:30, color: Colors.white),
       Icon(Feather.book_open, size:30, color: Colors.white),
       Icon(Feather.users, size:30, color: Colors.white),
       Icon(Feather.settings, size:30, color: Colors.white)
@@ -35,48 +35,48 @@ class _MainScreenState extends State<MainScreen> {
     return WillPopScope(
       onWillPop: () => Dialogs().showExitDialog(context),
       child: Scaffold(
+        resizeToAvoidBottomInset: true,
         extendBody: true,
-        body: PageView(
+        body: SafeArea(
+          child: PageView(
           physics: NeverScrollableScrollPhysics(),
           controller: _pageController,
           onPageChanged: onPageChanged,
-          children: <Widget>[Camera(), Videos(), Home(), Feed(), Profile()],
+          children: <Widget>[Camera(), Home(), Feed(), Profile()],
         ),
-        bottomNavigationBar: CurvedNavigationBar(
-          color: Theme.of(context).primaryColor,
-          items: items,
-          height: 55,
-          backgroundColor: Colors.transparent,
+        ),
+        bottomNavigationBar: BottomNavyBar(
+          showElevation: true,
+          // color: Theme.of(context).primaryColor,
+          // items: items,
+          // height: 55,
+          // backgroundColor: Colors.transparent,
 
           // backgroundColor: Theme.of(context).primaryColor,
           // selectedItemColor: Theme.of(context).accentColor,
           // unselectedItemColor: Colors.grey[500],
           // elevation: 20,
           // type: BottomNavigationBarType.fixed,
-          // items: <BottomNavigationBarItem>[
-          //   BottomNavigationBarItem(
-          //     icon: Icon(Feather.camera),
-          //     label: 'Camera',
-          //   ),
-          //   BottomNavigationBarItem(
-          //     icon: Icon(Feather.video),
-          //     label: 'Videos',
-          //   ),
-          //   BottomNavigationBarItem(
-          //     icon: Icon(Feather.book_open),
-          //     label: 'Book',
-          //   ),
-          //   BottomNavigationBarItem(
-          //     icon: Icon(Feather.users),
-          //     label: 'Feed',
-          //   ),
-          //   BottomNavigationBarItem(
-          //     icon: Icon(Feather.settings),
-          //     label: 'Settings',
-          //   ),
-          // ],
-          onTap: navigationTapped,
-          index: _page,
+          items: <BottomNavyBarItem>[
+            BottomNavyBarItem(
+              icon: Icon(Feather.camera),
+              title: Text('Camera'),
+            ),
+            BottomNavyBarItem(
+              icon: Icon(Feather.book_open),
+              title: Text('Book'),
+            ),
+            BottomNavyBarItem(
+              icon: Icon(Feather.users),
+              title: Text('Feed'),
+            ),
+            BottomNavyBarItem(
+              icon: Icon(Feather.settings),
+              title: Text('Settings'),
+            ),
+          ],
+          onItemSelected: navigationTapped,
+          selectedIndex: _page,
         ),
       ),
     );

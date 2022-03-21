@@ -39,11 +39,11 @@ class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin {
                 backgroundColor: Theme.of(context).primaryColor,
                 floating: true,
                 title: Text('Book',
-                  style: TextStyle(
-                  fontSize: 21.0,
-                  fontWeight: FontWeight.bold,
-                ),),
-
+                    style: TextStyle(
+                    fontSize: 21.0,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
                 centerTitle: true,
               )
             ],
