@@ -41,7 +41,7 @@ class _CameraState extends State<Camera> {
     File? compressedImage = await testCompressAndGetFile(
         image, image.parent.absolute.path + '/temp.jpg');
     return await http.post(
-      Uri.parse('https://face-emotion-new.cognitiveservices.azure.com/'),
+      Uri.parse('https://southeastasia.api.cognitive.microsoft.com/face/v1.0/detect?returnFaceAttributes=emotion'),
       headers: <String, String>{
         'Content-Type': 'application/octet-stream',
         'Ocp-Apim-Subscription-Key': kAzureApiKey,
@@ -150,18 +150,19 @@ class _CameraState extends State<Camera> {
     return Material(
       child: Scaffold(
         appBar: AppBar(
+          automaticallyImplyLeading: false,
           centerTitle: true,
+          backgroundColor: Theme.of(context).primaryColor,
           title: Text(
-            'Home',
+            'Emotion Dectector',
             style: TextStyle(
-              color: Color(0xFF63FFDA),
+                fontWeight: FontWeight.bold
             ),
           ),
           actions: <Widget>[
             IconButton(
                 icon: Icon(
                   Icons.info,
-                  color: Color(0xFF63FFDA),
                 ),
                 onPressed: () {
                   setState(() {
