@@ -197,16 +197,16 @@ class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin {
       itemCount: homeProvider.recent.feed?.entry?.length ?? 0,
       itemBuilder: (BuildContext context, int index) {
         Entry entry = homeProvider.recent.feed!.entry![index];
-        bool pass = false;
-        for(int i = 0; i < entry.category!.length; i++) {
-          if(entry.category![i].label == "19th century") {
-            pass = true;
-            break;
-          }
-        }
-        if(pass == false) {
-          return SizedBox();
-        }
+        // bool pass = false;
+        // for(int i = 0; i < entry.category!.length; i++) {
+        //   if(entry.category![i].label == "19th century") {
+        //     pass = true;
+        //     break;
+        //   }
+        // }
+        // if(pass == false) {
+        //   return SizedBox();
+        // }
         return Padding(
           padding: EdgeInsets.symmetric(horizontal: 5.0, vertical: 5.0),
           child: BookListItem(

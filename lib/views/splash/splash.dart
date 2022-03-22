@@ -1,7 +1,7 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:solution_challenge_2022/util/router.dart';
+import 'package:solution_challenge_2022/views/authentication/authentication.dart';
 import 'package:solution_challenge_2022/views/main_screen.dart';
 
 class Splash extends StatefulWidget {
@@ -21,7 +21,8 @@ class _SplashState extends State<Splash> {
   changeScreen() async {
     MyRouter.pushPageReplacement(
       context,
-      MainScreen(),
+      // MainScreen(),
+      Authentication(),
     );
   }
 

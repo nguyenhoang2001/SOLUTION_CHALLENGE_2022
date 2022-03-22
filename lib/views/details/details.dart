@@ -227,13 +227,12 @@ class _DetailsState extends State<Details> {
       // first value from the string as out local book path
       Map dl = dlList[0];
       String path = dl['path'];
-
-      List locators =
-          await LocatorDB().getLocator(widget.entry.id!.t!.toString());
-
+      // List locators =
+      //     await LocatorDB().getLocator(widget.entry.id!.t!.toString());
+      List locators = await provider.locator.getLocator(dl['id']);
       EpubViewer.setConfig(
         identifier: 'androidBook',
-        themeColor: Theme.of(context).accentColor,
+        themeColor: Theme.of(context).colorScheme.secondary,
         scrollDirection: EpubScrollDirection.VERTICAL,
         enableTts: false,
         allowSharing: true,
@@ -241,13 +240,14 @@ class _DetailsState extends State<Details> {
       EpubViewer.open(path,
           lastLocation:
               locators.isNotEmpty ? EpubLocator.fromJson(locators[0]) : null);
-      EpubViewer.locatorStream.listen((event) async {
-        // Get locator here
-        Map json = jsonDecode(event);
-        json['bookId'] = widget.entry.id!.t!.toString();
-        // Save locator to your database
-        await LocatorDB().update(json);
-      });
+      // EpubViewer.locatorStream.listen((event) async {
+      //   // Get locator here
+      //   print('I got the eventttttttttttttttttttttttttttttttttttttttttttttttttttttttt');
+      //   Map json = jsonDecode(event);
+      //   json['bookId'] = widget.entry.id!.t!.toString();
+      //   // Save locator to your database
+      //   await provider.locator.update(json);
+      // });
     }
   }
 
