@@ -12,7 +12,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  late Channel _channel;
+  Channel? _channel;
   bool _isLoading = false;
 
   @override
@@ -82,10 +82,10 @@ class _HomeScreenState extends State<HomeScreen> {
   _loadMoreVideos() async {
     _isLoading = true;
     List<Video> moreVideos = await APIService(widget.emotion)
-        .fetchVideosFromPlaylist(playlistId: _channel.uploadPlaylistId);
-    List<Video> allVideos = _channel.videos..addAll(moreVideos);
+        .fetchVideosFromPlaylist(playlistId: _channel!.uploadPlaylistId);
+    List<Video> allVideos = _channel!.videos..addAll(moreVideos);
     setState(() {
-      _channel.videos = allVideos;
+      _channel!.videos = allVideos;
     });
     _isLoading = false;
   }
@@ -94,32 +94,31 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('${widget.emotion} Playlist'),
+        centerTitle: true,
+        title: Text('${widget.emotion} playlist'),
       ),
       body: _channel != null
-//      NotificationListener<ScrollNotification>(
-//              onNotification: (ScrollNotification scrollDetails) {
-//                if (
-////                !_isLoading &&
-////                    _channel.videos.length != (_channel.videoCount) &&
-//                    scrollDetails.metrics.pixels ==
-//                        scrollDetails.metrics.maxScrollExtent) {
-//                  _loadMoreVideos();
-//                }
-//                return false;
-//              },
-          //        child:
-          ? ListView.builder(
-              itemCount: 1 + _channel.videos.length,
+     ? NotificationListener<ScrollNotification>(
+             onNotification: (ScrollNotification scrollDetails) {
+               if (!_isLoading &&
+                   _channel!.videos.length != (_channel!.videoCount) &&
+                   scrollDetails.metrics.pixels ==
+                       scrollDetails.metrics.maxScrollExtent) {
+                 _loadMoreVideos();
+               }
+               return false;
+             },
+          child: ListView.builder(
+              itemCount: 1 + _channel!.videos.length,
               itemBuilder: (BuildContext context, int index) {
                 if (index == 0) {
                   return _buildProfileInfo();
                 }
-                Video video = _channel.videos[index - 1];
+                Video video = _channel!.videos[index - 1];
                 return _buildVideo(video);
               },
-            )
-          //   )
+          )
+      )
           : Center(
               child: CircularProgressIndicator(
                 valueColor: AlwaysStoppedAnimation<Color>(

@@ -27,8 +27,8 @@ class Channel {
       profilePictureUrl: map['snippet']['thumbnails']['default']['url'],
       subscriberCount: map['statistics']['subscriberCount'],
       //videoCount: map['statistics']['videoCount'],
-      videoCount: playlistId['anger']!.length,
-      uploadPlaylistId: map['contentDetails']['relatedPlaylists']['uploads'],
+      // videoCount: playlistId['anger']!.length,
+      // uploadPlaylistId: map['contentDetails']['relatedPlaylists']['uploads'],
       videos: [],
       //uploadPlaylistId: playlistId['happiness'],
     );

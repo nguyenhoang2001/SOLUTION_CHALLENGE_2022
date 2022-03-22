@@ -1,4 +1,4 @@
-Map<String,String> playlistId = {
+Map<String,dynamic> playlistId = {
   'anger' :'PL7oVQqY8qpwkoCrW0VLap4s6-sVKPC66Y',
   'contempt' : 'PL7oVQqY8qpwmINEk6Mhs3CAWEof2Dl67A',
   'disgust' : 'PL7oVQqY8qpwnNaQKzKnBNiO1qMZpxh2k_',

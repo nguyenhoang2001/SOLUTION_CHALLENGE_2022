@@ -38,10 +38,10 @@ class APIService {
       Channel channel = Channel.fromMap(data);
 
       // Fetch first batch of videos from uploads playlist
-      // channel.videos = await fetchVideosFromPlaylist(
-      //   playlistId: playlistId[emotion],
-      //   playlistId: channel.uploadPlaylistId,
-      // );
+      channel.videos = await fetchVideosFromPlaylist(
+        playlistId: playlistId[emotion],
+        // playlistId: channel.uploadPlaylistId,
+      );
       return channel;
     } else {
       throw json.decode(response.body)['error']['message'];
