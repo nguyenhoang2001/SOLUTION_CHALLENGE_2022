@@ -35,7 +35,8 @@ class _CommentItem extends State<CommentItem>{
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: widget.data['toCommentID'] == null ? EdgeInsets.all(8.0) : EdgeInsets.fromLTRB(34.0,8.0,8.0,8.0),
+      padding: widget.data['toCommentID'] == "" ? EdgeInsets.all(8.0) : EdgeInsets.all(8.0),
+      // EdgeInsets.fromLTRB(34.0,8.0,8.0,8.0),
       child: Stack(
         children: <Widget>[
           Row(
@@ -44,8 +45,8 @@ class _CommentItem extends State<CommentItem>{
               Padding(
                 padding: const EdgeInsets.fromLTRB(6.0,2.0,10.0,2.0),
                 child: Container(
-                    width: widget.data['toCommentID'] == null ? 48 : 40,
-                    height: widget.data['toCommentID'] == null ? 48 : 40,
+                    width: widget.data['toCommentID'] == "" ? 48 : 48,
+                    height: widget.data['toCommentID'] == "" ? 48 : 48,
                     child: Image.asset('assets/images/${widget.data['userThumbnail']}')
                 ),
               ),
@@ -64,12 +65,12 @@ class _CommentItem extends State<CommentItem>{
                           ),
                           Padding(
                             padding: const EdgeInsets.only(left:4.0),
-                            child: widget.data['toCommentID'] == null ? Text(widget.data['commentContent'],maxLines: null,) :
+                            child: widget.data['toCommentID'] == "" ? Text(widget.data['commentContent'],maxLines: null,) :
                             RichText(
                               text: TextSpan(
                                 children: <TextSpan>[
-                                  TextSpan(text: widget.data['toUserID'], style: TextStyle(fontWeight: FontWeight.bold,color: Colors.blue[800])),
-                                  TextSpan(text: Utils.commentWithoutReplyUser(widget.data['commentContent']), style: TextStyle(color:Colors.black)),
+                                  TextSpan(text: widget.data['toUserID'], style: TextStyle(fontWeight: FontWeight.bold,color: Colors.lightBlue[400])),
+                                  TextSpan(text: Utils.commentWithoutReplyUser(widget.data['commentContent']), style: const TextStyle(color:Colors.black)),
                                 ],
                               ),
                             ),
@@ -77,12 +78,20 @@ class _CommentItem extends State<CommentItem>{
                         ],
                       ),
                     ),
-                    width: widget.size.width- (widget.data['toCommentID'] == null ? 90 : 110),
-                    decoration: BoxDecoration(
-                      color: Colors.grey[300],
+                    width: widget.size.width - (widget.data['toCommentID'] == "" ? 90 : 90),
+                    height: 100,
+                    decoration: const BoxDecoration(
+                      color: Colors.white,
                       borderRadius: BorderRadius.all(
-                          Radius.circular(15.0)
+                          Radius.circular(5.0),
                       ),
+                      boxShadow: [
+                          BoxShadow(
+                            color: Colors.black12,
+                            blurRadius: 7,
+                            offset: Offset(3, 5),
+                          ),
+                      ],
                     ),
                   ),
                   Padding(
@@ -92,21 +101,23 @@ class _CommentItem extends State<CommentItem>{
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: <Widget>[
-                          Text(Utils.readTimestamp(widget.data['commentTimeStamp'])),
+                          Text(Utils.readTimestamp(widget.data['commentTimeStamp']),
+                            style: const TextStyle(color: Colors.black45),
+                          ),
 
                           widget.data['commentLikeCount'] > 0 ? Text('${widget.data['commentLikeCount']}',style:TextStyle(fontSize: 14)):Container(),
                           GestureDetector(
-                              onTap: () => _updateLikeCount(_currentMyData.myLikeCommnetList != null && _currentMyData.myLikeCommnetList.contains(widget.data['commentID']) ? true : false),
+                              onTap: () => _updateLikeCount(_currentMyData.myLikeCommnetList.isNotEmpty && _currentMyData.myLikeCommnetList.contains(widget.data['commentID']) ? true : false),
                               child: Text('Like',
-                                  style:TextStyle(fontWeight: FontWeight.bold,color:_currentMyData.myLikeCommnetList != null && _currentMyData.myLikeCommnetList.contains(widget.data['commentID']) ? Colors.red[900] : Colors.grey[700]))
+                                  style:TextStyle(fontWeight: FontWeight.bold,color:_currentMyData.myLikeCommnetList.isNotEmpty && _currentMyData.myLikeCommnetList.contains(widget.data['commentID']) ? Colors.lightBlue[400] : Colors.black45))
                           ),
                           GestureDetector(
                               onTap: (){
                                 widget.replyComment([widget.data['userName'],widget.data['commentID'],widget.data['FCMToken']]);
-//                                _replyComment(widget.data['userName'],widget.data['commentID'],widget.data['FCMToken']);
+                               // _replyComment(widget.data['userName'],widget.data['commentID'],widget.data['FCMToken']);
                                 print('leave comment of comment');
                               },
-                              child: Text('Reply',style:TextStyle(fontWeight: FontWeight.bold,color:Colors.grey[700]))
+                              child: const Text('Reply',style:TextStyle(fontWeight: FontWeight.bold,color:Colors.black45))
                           ),
                         ],
                       ),
@@ -117,19 +128,19 @@ class _CommentItem extends State<CommentItem>{
             ],
           ),
 
-          widget.data['commentLikeCount'] > 0 ? Positioned(
-            bottom: 19,
-            right:-3,
-            child: Padding(
-              padding: const EdgeInsets.all(2.0),
-              child: Row(
-                children: <Widget>[
-                  Icon(Icons.favorite_outlined,size: 18,color: Colors.red[900],),
-                  //Text('${widget.data['commentLikeCount']}',style:TextStyle(fontSize: 14)),
-                ],
-              ),
-            ),
-          ) : Container(),
+          // widget.data['commentLikeCount'] > 0 ? Positioned(
+          //   bottom: 19,
+          //   right:-3,
+          //   child: Padding(
+          //     padding: const EdgeInsets.all(2.0),
+          //     child: Row(
+          //       children: <Widget>[
+          //         Icon(Icons.favorite_outlined,size: 18,color: Colors.red[900],),
+          //         //Text('${widget.data['commentLikeCount']}',style:TextStyle(fontSize: 14)),
+          //       ],
+          //     ),
+          //   ),
+          // ) : Container(),
         ],
       ),
     );

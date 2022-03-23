@@ -73,12 +73,12 @@ class FBCloudStore{
     // }
   }
 
-  static Future<void> commentToPost(String toUserID,String toCommentID,String postID,String commentContent,MyProfileData? userProfile,String postFCMToken) async{
+  static Future<void> commentToPost(String toUserID,String toCommentID,String postID,String commentContent,MyProfileData? userProfile) async{
     String commentID = Utils.getRandomString(8) + Random().nextInt(500).toString();
-    String? myFCMToken;
-    if(userProfile!.myFCMToken == null){
+    String myFCMToken;
+    if(userProfile!.myFCMToken.isEmpty){
       SharedPreferences prefs = await SharedPreferences.getInstance();
-      myFCMToken = prefs.get('FCMToken') as String?;
+      myFCMToken = prefs.get('FCMToken') as String;
     }else {
       myFCMToken = userProfile.myFCMToken;
     }

@@ -73,6 +73,8 @@ dependencies:
   flutter_launcher_icons: ^0.9.2 # this one a
   # lib for profileView
   percent_indicator: ^4.0.0 # this one a
+  #lib for ui of threaditem
+  font_awesome_flutter: ^9.0.0
 dev_dependencies:
   flutter_test:
     sdk: flutter
