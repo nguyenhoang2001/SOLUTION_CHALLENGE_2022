@@ -10,6 +10,8 @@ import 'package:solution_challenge_2022/views/camera//utilities/key.dart';
 import 'package:solution_challenge_2022/views/camera//youtube/screens/home_screen.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 
+import '../home/home.dart';
+
 class Camera extends StatefulWidget {
   const Camera({Key? key}) : super(key: key);
 
@@ -73,6 +75,7 @@ class _CameraState extends State<Camera> {
         }
       });
       print(emotion);
+      saveEmotion(emotion);
       setState(() {
         isLoading = false;
       });
@@ -87,6 +90,7 @@ class _CameraState extends State<Camera> {
   }
 
   _onAlertButtonsPressed(context, String emotion) {
+
     Alert(
       context: context,
       type: AlertType.success,

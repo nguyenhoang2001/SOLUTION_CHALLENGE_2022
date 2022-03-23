@@ -127,20 +127,6 @@ class _CommentItem extends State<CommentItem>{
               ),
             ],
           ),
-
-          // widget.data['commentLikeCount'] > 0 ? Positioned(
-          //   bottom: 19,
-          //   right:-3,
-          //   child: Padding(
-          //     padding: const EdgeInsets.all(2.0),
-          //     child: Row(
-          //       children: <Widget>[
-          //         Icon(Icons.favorite_outlined,size: 18,color: Colors.red[900],),
-          //         //Text('${widget.data['commentLikeCount']}',style:TextStyle(fontSize: 14)),
-          //       ],
-          //     ),
-          //   ),
-          // ) : Container(),
         ],
       ),
     );

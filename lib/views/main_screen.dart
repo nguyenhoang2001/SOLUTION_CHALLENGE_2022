@@ -134,40 +134,28 @@ void takeMyData() async {
     }else{
       myThumbnail = 'user.png';
     }
+
     if (prefs.get('myName') == null){
       String tempName = realName!;
       prefs.setString('myName',tempName);
       myName = tempName;
     }else{
-      myName = prefs.get('myName') as String;}
+      myName = prefs.get('myName') as String;
+    }
 
     if(myName != realName){
       String tempName = realName!;
       prefs.setString('myName',tempName);
       myName = tempName;
     }
-    // print('my name: ' + myName);
-    // print('my Thumbnail: ' + myThumbnail);
-    // print('my name: ' + (prefs.getString('FCMToken') as String ));
     setState(() {
       myData = MyProfileData(
         myThumbnail: myThumbnail,
         myName: myName,
-        // myLikeList: prefs.getStringList('likeList'),
-        // myLikeCommnetList: prefs.getStringList('likeCommentList'),
         myFCMToken: prefs.getString('FCMToken') as String, myLikeCommnetList: [], myLikeList: [],
       );
     });
-    // myData = MyProfileData(
-    //   myThumbnail: myThumbnail,
-    //   myName: myName,
-    //   // myLikeList: prefs.getStringList('likeList'),
-    //   // myLikeCommnetList: prefs.getStringList('likeCommentList'),
-    //   myFCMToken: prefs.getString('FCMToken') as String, myLikeCommnetList: [], myLikeList: [],
-    // );
-    // if(myData != null) {
-    //   print('myData is not null in the main_screeen');
-    // }
+
     setState(() {
       _isLoading = false;
     });
