@@ -43,6 +43,7 @@ class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin {
             floatHeaderSlivers: true,
             headerSliverBuilder: (context, innerBoxIsScrolled) => [
               SliverAppBar(
+                automaticallyImplyLeading: false,
                 backgroundColor: Theme.of(context).primaryColor,
                 floating: true,
                 title: const Text('Book',

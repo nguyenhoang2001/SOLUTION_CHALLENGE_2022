@@ -30,6 +30,7 @@ class _ThreadMain extends State<ThreadMain>{
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         centerTitle: true,
 // <<<<<<< HEAD
         backgroundColor: Theme.of(context).primaryColor,

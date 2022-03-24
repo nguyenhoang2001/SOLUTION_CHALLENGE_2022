@@ -1,5 +1,5 @@
 import 'dart:ui';
-
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -19,33 +19,53 @@ class _UserInfoState extends State<UserInfo> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-          child: Column(
-            children: [
-              //for circle avtar image
-              _getHeader(),
-              SizedBox(
-                height: 10,
-              ),
-              _profileName("Name of user"),
-              SizedBox(
-                height: 14,
-              ),
-              _heading("Personal Details"),
-              SizedBox(
-                height: 6,
-              ),
-              _detailsCard(),
-              SizedBox(
-                height: 10,
-              ),
-
-              SizedBox(
-                height: 6,
-              ),
-
-            ],
-          )),
+      appBar: AppBar(
+        centerTitle: true,
+        backgroundColor: Theme.of(context).primaryColor,
+        title: const Text(
+          'Your Information',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ),
+      body: StreamBuilder<QuerySnapshot>(
+        stream: FirebaseFirestore.instance.collection('Users').doc(uid).collection('Profile').snapshots(),
+        builder: (context, snapshot) {
+          if(!snapshot.hasData){
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+          List<DocumentSnapshot> document = snapshot.data!.docs;
+          return SafeArea(
+                  child: Column(
+                    children: [
+                      //for circle avatar image
+                      _getHeader(),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      _profileName('${document[0]['Name']}'),
+                      const SizedBox(
+                        height: 14,
+                      ),
+                      _heading('${document[0]['Job']}'),
+                      const SizedBox(
+                        height: 6,
+                      ),
+                      _detailsCard('${document[0]['Email']}','${document[0]['Phone number']}','${document[0]['Date of birth']}'),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      const SizedBox(
+                        height: 6,
+                      ),
+                    ],
+                  ),
+          );
+        }
+      ),
     );
   }
 
@@ -58,13 +78,13 @@ class _UserInfoState extends State<UserInfo> {
           child: Container(
             height: 100,
             width: 100,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               //borderRadius: BorderRadius.all(Radius.circular(10.0)),
                 shape: BoxShape.circle,
                 image: DecorationImage(
                     fit: BoxFit.fill,
-                    image: NetworkImage(
-                        "https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909__340.png"))
+                    image: AssetImage('assets/images/user.png'),
+                )
               // color: Colors.orange[100],
             ),
           ),
@@ -79,7 +99,7 @@ class _UserInfoState extends State<UserInfo> {
       child: Center(
         child: Text(
           name,
-          style: TextStyle(
+          style: const TextStyle(
               color: Colors.black, fontSize: 30, fontWeight: FontWeight.w800),
         ),
       ),
@@ -96,7 +116,7 @@ class _UserInfoState extends State<UserInfo> {
     );
   }
 
-  Widget _detailsCard() {
+  Widget _detailsCard(String email, String phoneNumber, String dob) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Card(
@@ -106,23 +126,23 @@ class _UserInfoState extends State<UserInfo> {
             //row for each deatails
             ListTile(
               leading: Icon(Icons.email),
-              title: Text("Something@gmail.com"),
+              title: Text(email),
             ),
-            Divider(
+            const Divider(
               height: 0.6,
               color: Colors.black87,
             ),
             ListTile(
               leading: Icon(Icons.phone),
-              title: Text("1234567890"),
+              title: Text(phoneNumber),
             ),
-            Divider(
+            const Divider(
               height: 0.6,
               color: Colors.black87,
             ),
             ListTile(
               leading: Icon(Icons.cake),
-              title: Text("date of birth"),
+              title: Text(dob),
             )
           ],
         ),
