@@ -19,7 +19,7 @@ class _AuthenticationState extends State<Authentication> with TickerProviderStat
       body : Container(
         decoration: const BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('assets/images/hoang.png'),
+            image: AssetImage('assets/images/app-background.jpg'),
             alignment: Alignment.topCenter,
           ),
         ),

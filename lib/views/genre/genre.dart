@@ -37,6 +37,7 @@ class _GenreState extends State<Genre> {
       builder: (BuildContext context, GenreProvider provider, Widget? child) {
         return Scaffold(
           appBar: AppBar(
+            backgroundColor: Theme.of(context).primaryColor,
             centerTitle: true,
             title: Text('${widget.title}',
               style: TextStyle(

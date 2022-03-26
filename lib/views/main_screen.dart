@@ -73,18 +73,22 @@ class _MainScreenState extends State<MainScreen> {
           // type: BottomNavigationBarType.fixed,
           items: <BottomNavyBarItem>[
             BottomNavyBarItem(
+              activeColor: Theme.of(context).primaryColor,
               icon: Icon(Feather.camera),
               title: Text('Camera'),
             ),
             BottomNavyBarItem(
+              activeColor: Theme.of(context).primaryColor,
               icon: Icon(Feather.book_open),
               title: Text('Book'),
             ),
             BottomNavyBarItem(
+              activeColor: Theme.of(context).primaryColor,
               icon: Icon(Feather.users),
               title: Text('Feed'),
             ),
             BottomNavyBarItem(
+              activeColor: Theme.of(context).primaryColor,
               icon: Icon(Feather.settings),
               title: Text('Settings'),
             ),

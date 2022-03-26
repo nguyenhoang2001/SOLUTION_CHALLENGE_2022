@@ -26,7 +26,7 @@ class _RegisterViewState extends State<RegisterView> {
       body : Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('assets/images/hoang.png'),
+            image: AssetImage('assets/images/app-background.jpg'),
             alignment: Alignment.topCenter,
           ),
         ),

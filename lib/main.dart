@@ -7,7 +7,6 @@ import 'package:solution_challenge_2022/view_models/details_provider.dart';
 import 'package:solution_challenge_2022/view_models/favorites_provider.dart';
 import 'package:solution_challenge_2022/view_models/genre_provider.dart';
 import 'package:solution_challenge_2022/view_models/home_provider.dart';
-import 'package:solution_challenge_2022/views/authentication/authentication.dart';
 import 'package:solution_challenge_2022/views/splash/splash.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';

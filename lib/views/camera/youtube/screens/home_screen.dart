@@ -94,8 +94,9 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Theme.of(context).primaryColor,
         centerTitle: true,
-        title: Text('${widget.emotion} playlist'),
+        title: Text('${widget.emotion} playlist', style: TextStyle(fontWeight: FontWeight.bold,),),
       ),
       body: _channel != null
      ? NotificationListener<ScrollNotification>(

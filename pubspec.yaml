@@ -66,7 +66,7 @@ dependencies:
   firebase_messaging: ^11.2.11 # this one a
   flutter_local_notifications: ^9.4.0 # this one a
   image_picker: ^0.8.4+11 # this one a
-  image_cropper: ^1.5.0 # this one a
+#  image_cropper: ^1.5.0 # this one a
   photo_view: ^0.13.0 # this one a
   url_launcher: ^6.0.20 # this one a
   keyboard_actions: ^3.4.7 # this one a

@@ -32,11 +32,11 @@ class _ProfileState extends State<Profile> {
         'title': 'Downloads',
         'function': () => _pushPage(Downloads()),
       },
-      {
-        'icon': Feather.moon,
-        'title': 'Dark Mode',
-        'function': () => _pushPage(Downloads()),
-      },
+      // {
+      //   'icon': Feather.moon,
+      //   'title': 'Dark Mode',
+      //   'function': () => _pushPage(Downloads()),
+      // },
       {
         'icon': Feather.info,
         'title': 'About',
@@ -142,7 +142,7 @@ class _ProfileState extends State<Profile> {
             'About',
           ),
           content: Text(
-            'Designed by hooray',
+            'Designed by Booyah',
           ),
           actions: <Widget>[
             FlatButton(
