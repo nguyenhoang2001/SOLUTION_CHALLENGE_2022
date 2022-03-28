@@ -31,10 +31,8 @@ class _ThreadMain extends State<ThreadMain>{
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-// <<<<<<< HEAD
         backgroundColor: Theme.of(context).primaryColor,
-        // title: Text('Downloads'),
-// =======
+        automaticallyImplyLeading: false,
         title: const Text(
           'Newsfeed',
           style: TextStyle(

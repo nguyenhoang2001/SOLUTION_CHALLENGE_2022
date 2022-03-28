@@ -33,11 +33,14 @@ class APIService {
     // Get Channel
     var response = await http.get(uri, headers: headers);
     if (response.statusCode == 200) {
-      print(emotion);
       Map<String, dynamic> data = json.decode(response.body)['items'][0];
       Channel channel = Channel.fromMap(data);
 
       // Fetch first batch of videos from uploads playlist
+      print(playlistId[emotion]);
+      print(emotion);
+      print('\n');
+
       channel.videos = await fetchVideosFromPlaylist(
         playlistId: playlistId[emotion],
         // playlistId: channel.uploadPlaylistId,

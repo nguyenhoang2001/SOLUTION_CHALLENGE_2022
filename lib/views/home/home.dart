@@ -38,6 +38,7 @@ class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin {
               SliverAppBar(
                 backgroundColor: Theme.of(context).primaryColor,
                 floating: true,
+                automaticallyImplyLeading: false,
                 title: Text('Book',
                     style: TextStyle(
                     fontSize: 21.0,

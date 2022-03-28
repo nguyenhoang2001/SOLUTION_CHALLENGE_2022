@@ -60,6 +60,7 @@ class _ProfileState extends State<Profile> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
+        automaticallyImplyLeading: false,
         backgroundColor: Theme.of(context).primaryColor,
         title: Text(
           'Settings',
