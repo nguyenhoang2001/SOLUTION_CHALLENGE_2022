@@ -102,26 +102,8 @@ User can also like or comment on others's post. If there's an impolite post, use
 <p align="center"><img src="./readme_img/comment.png" width="256" height="455"></p>
 
 #### **Setting**
-This is the place for user to check what's there favourite, downloaded books or their information.
+This is the place for user to check what's there favorite books, downloaded books or their information.
 
 <p align="center"><img src="./readme_img/setting.png" width="256" height="455"></p>
-
-##### **Favorite**
-User can find what's book they liked in here.
-
-<p align="center"><img src="./readme_img/favourite.png" width="256" height="455"></p>
-
-##### **Download**
-All the books downloaded are stored in this section.
-<p align="center"><img src="./readme_img/download.png" width="256" height="455"></p>
-
-##### **About**
-To show user the producer.
-<p align="center"><img src="./readme_img/about.png" width="256" height="455"></p>
-
-##### **Info**
-User can see their information here.
-
-<p align="center"><img src="./readme_img/info.png" width="256" height="455"></p>
 
 ## 
