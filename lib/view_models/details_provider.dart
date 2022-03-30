@@ -221,12 +221,15 @@ class DetailsProvider extends ChangeNotifier {
   }
 
   addFav() async {
+    print(entry!.id!.t.toString());
+    print(entry!.toJson());
     await favDB.add({'id': entry!.id!.t.toString(), 'item': entry!.toJson()});
+    print(entry!.id!.t.toString());
     checkFav();
   }
 
   removeFav() async {
-    favDB.remove({'id': entry!.id!.t.toString()}).then((v) {
+    favDB.remove({'id': entry!.id!.t.toString(), 'item': entry!.toJson()}).then((v) {
       print(v);
       checkFav();
     });

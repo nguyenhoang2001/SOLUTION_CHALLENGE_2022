@@ -58,7 +58,7 @@ class _DetailsState extends State<Details> {
               IconButton(
                 onPressed: () async {
                   if (detailsProvider.faved) {
-                    detailsProvider.removeFav();
+                    //detailsProvider.removeFav();
                   } else {
                     detailsProvider.addFav();
                   }
@@ -240,14 +240,6 @@ class _DetailsState extends State<Details> {
       EpubViewer.open(path,
           lastLocation:
               locators.isNotEmpty ? EpubLocator.fromJson(locators[0]) : null);
-      // EpubViewer.locatorStream.listen((event) async {
-      //   // Get locator here
-      //   print('I got the eventttttttttttttttttttttttttttttttttttttttttttttttttttttttt');
-      //   Map json = jsonDecode(event);
-      //   json['bookId'] = widget.entry.id!.t!.toString();
-      //   // Save locator to your database
-      //   await provider.locator.update(json);
-      // });
     }
   }
 
@@ -261,11 +253,13 @@ class _DetailsState extends State<Details> {
       );
     } else {
       return FlatButton(
-        onPressed: () => provider.downloadFile(
-          context,
-          widget.entry.link![3].href!,
-          widget.entry.title!.t!.replaceAll(' ', '_').replaceAll(r"\'", "'"),
-        ),
+        onPressed: () => {
+          provider.downloadFile(
+            context,
+            widget.entry.link![3].href!,
+            widget.entry.title!.t!.replaceAll(' ', '_').replaceAll(r"\'", "'"),
+          ),
+        },
         child: Text(
           'Download',
         ),

@@ -87,16 +87,6 @@ class _DownloadsState extends State<Downloads> {
                       ? EpubLocator.fromJson(locators[0])
                       : null
               );
-              // print('came here with locators[0]: ' + locators[0].toString());
-              // EpubViewer.locatorStream.listen((event) async {
-              //   // Get locator here
-              //   print('This is caught' +event);
-              //   Map json = jsonDecode(event);
-              //   json['bookId'] = dl['id'];
-              //   // Save locator to your database
-              //   // await LocatorDB().update(json);
-              //   await locatedb.update(json);
-              // });
             },
             child: Padding(
               padding: EdgeInsets.symmetric(vertical: 5, horizontal: 15),
