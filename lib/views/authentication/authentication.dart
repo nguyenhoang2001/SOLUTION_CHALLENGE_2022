@@ -19,7 +19,7 @@ class _AuthenticationState extends State<Authentication> with TickerProviderStat
       body : Container(
         decoration: const BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('assets/images/hoang.png'),
+            image: AssetImage('assets/images/app-background.jpg'),
             alignment: Alignment.topCenter,
           ),
         ),
@@ -48,7 +48,7 @@ class _AuthenticationState extends State<Authentication> with TickerProviderStat
                           height: 45,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(15.0),
-                            color: Color(0xff40e0d0),
+                            color: Theme.of(context).primaryColor,
                           ),
                           child : MaterialButton(
                             onPressed: (){},
@@ -70,7 +70,7 @@ class _AuthenticationState extends State<Authentication> with TickerProviderStat
                               );//navigate
                             },
                             child: Text("Register"),
-                            textColor: Color(0xff40e0d0),
+                            textColor: Theme.of(context).primaryColor,
                           ),
                         ),//register
                       ],
@@ -114,7 +114,7 @@ class _AuthenticationState extends State<Authentication> with TickerProviderStat
                       height: 45,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(15.0),
-                        color: Color(0xff40e0d0),
+                        color: Theme.of(context).primaryColor,
                       ),
                       child : MaterialButton(
                         onPressed: () async {

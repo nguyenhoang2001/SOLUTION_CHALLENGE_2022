@@ -26,7 +26,7 @@ class _RegisterViewState extends State<RegisterView> {
       body : Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('images/hoang.png'),
+            image: AssetImage('assets/images/app-background.jpg'),
             alignment: Alignment.topCenter,
           ),
         ),
@@ -67,7 +67,7 @@ class _RegisterViewState extends State<RegisterView> {
                               //}
                             },
                             child: Text("Login"),
-                            textColor: Color(0xff40e0d0),
+                            textColor: Theme.of(context).primaryColor,
                           ),
                         ),
                         Container(
@@ -75,7 +75,7 @@ class _RegisterViewState extends State<RegisterView> {
                           height: 45,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(15.0),
-                            color: Color(0xff40e0d0),
+                            color: Theme.of(context).primaryColor,
                           ),
                           child : MaterialButton(
                             onPressed: (){},
@@ -184,7 +184,7 @@ class _RegisterViewState extends State<RegisterView> {
                       height: 45,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(15.0),
-                        color: Color(0xff40e0d0),
+                        color: Theme.of(context).primaryColor,
                       ),
                       child : MaterialButton(
                         onPressed: () async {

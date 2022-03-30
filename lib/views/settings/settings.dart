@@ -32,11 +32,11 @@ class _ProfileState extends State<Profile> {
         'title': 'Downloads',
         'function': () => _pushPage(Downloads()),
       },
-      {
-        'icon': Feather.moon,
-        'title': 'Dark Mode',
-        'function': () => _pushPage(Downloads()),
-      },
+      // {
+      //   'icon': Feather.moon,
+      //   'title': 'Dark Mode',
+      //   'function': () => _pushPage(Downloads()),
+      // },
       {
         'icon': Feather.info,
         'title': 'About',
@@ -59,10 +59,10 @@ class _ProfileState extends State<Profile> {
 
     return Scaffold(
       appBar: AppBar(
-        centerTitle: true,
         automaticallyImplyLeading: false,
+        centerTitle: true,
         backgroundColor: Theme.of(context).primaryColor,
-        title: Text(
+        title: const Text(
           'Settings',
           style: TextStyle(
             fontWeight: FontWeight.bold
@@ -142,7 +142,7 @@ class _ProfileState extends State<Profile> {
             'About',
           ),
           content: Text(
-            'Designed by hooray',
+            'Designed by Booyah',
           ),
           actions: <Widget>[
             FlatButton(

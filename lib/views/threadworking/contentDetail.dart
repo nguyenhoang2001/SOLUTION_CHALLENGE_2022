@@ -10,7 +10,7 @@ import '../subViews/threadItem.dart';
 
 
 class ContentDetail extends StatefulWidget{
-  final DocumentSnapshot postData;
+  DocumentSnapshot postData;
   MyProfileData? myData;
   final ValueChanged<MyProfileData> updateMyData;
   ContentDetail({required this.postData,required this.myData,required this.updateMyData});
@@ -19,10 +19,10 @@ class ContentDetail extends StatefulWidget{
 
 class _ContentDetail extends State<ContentDetail> {
   final TextEditingController _msgTextController = TextEditingController();
-  late MyProfileData currentMyData;
-  late String _replyUserID;
-  late String _replyCommentID;
-  late String _replyUserFCMToken;
+  MyProfileData? currentMyData;
+  String? _replyUserID;
+  String? _replyCommentID;
+  String? _replyUserFCMToken;
   final FocusNode _writingTextFocus = FocusNode();
 
   @override
@@ -40,7 +40,7 @@ class _ContentDetail extends State<ContentDetail> {
     }
   }
 
-  void _replyComment(List<String> commentData) async{//String replyTo,String replyCommentID,String replyUserToken) async {
+  void _replyComment(List<String> commentData) async{
     _replyUserID = commentData[0];
     _replyCommentID = commentData[1];
     _replyUserFCMToken = commentData[2];
@@ -134,11 +134,24 @@ class _ContentDetail extends State<ContentDetail> {
 
   Future<void> _handleSubmitted(String text) async {
     try {
-      await FBCloudStore.commentToPost(_replyUserID == null ? widget.postData['userName'] : _replyUserID,_replyCommentID == null ? widget.postData['commentID'] : _replyCommentID,widget.postData['postID'], _msgTextController.text, widget.myData,_replyUserID == null ? widget.postData['FCMToken'] : _replyUserFCMToken);
+      String? toUserID, toCommentID = "";
+      if(_replyUserID == "") {
+        toUserID = widget.postData['userName'];
+      }else {
+        toUserID = _replyUserID;
+      }
+      print('the comment ID: '+ _replyCommentID!);
+      if(_replyCommentID!.isNotEmpty) {
+        toCommentID = _replyCommentID! + "index";
+        await FBCloudStore.commentToPost(toUserID!,toCommentID,widget.postData['postID'], _msgTextController.text, widget.myData);
+      }else{
+        await FBCloudStore.commentToPost(toUserID!,toCommentID,widget.postData['postID'], _msgTextController.text, widget.myData);
+      }
       await FBCloudStore.updatePostCommentCount(widget.postData);
       FocusScope.of(context).requestFocus(FocusNode());
-      _msgTextController.text = '';
+      _msgTextController.text = "";
     }catch(e){
+      print(e);
       print('error to submit comment');
     }
   }

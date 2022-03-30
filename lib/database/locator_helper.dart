@@ -46,7 +46,6 @@ class LocatorDB {
     print('work here: ' + id);
     final db = ObjectDB(FileSystemStorage(await getPath()));
     print('The db: '+db.toString());
-
     List val =  await db.find({'bookId': id});
     await db.close();
     return val;

@@ -40,6 +40,7 @@ class _FavoritesState extends State<Favorites> {
           Widget? child) {
         return Scaffold(
           appBar: AppBar(
+            backgroundColor: Theme.of(context).primaryColor,
             centerTitle: true,
             title: Text(
               'Favorites',

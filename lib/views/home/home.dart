@@ -16,6 +16,13 @@ class Home extends StatefulWidget {
   @override
   _HomeState createState() => _HomeState();
 }
+String myEmotion = "normal";
+
+void saveEmotion(String emotion) {
+  if(emotion.isNotEmpty) {
+    myEmotion = emotion;
+  }
+}
 
 class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin {
   @override
@@ -36,10 +43,15 @@ class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin {
             floatHeaderSlivers: true,
             headerSliverBuilder: (context, innerBoxIsScrolled) => [
               SliverAppBar(
+                automaticallyImplyLeading: false,
                 backgroundColor: Theme.of(context).primaryColor,
                 floating: true,
-                automaticallyImplyLeading: false,
-                title: Text('Book',
+// <<<<<<< HEAD
+//                 automaticallyImplyLeading: false,
+//                 title: Text('Book',
+// =======
+                title: const Text('Book',
+// >>>>>>> 94ad20cbcabc5c8af3573ae251ea335942ffffde
                     style: TextStyle(
                     fontSize: 21.0,
                     fontWeight: FontWeight.bold,
@@ -192,24 +204,46 @@ class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin {
   _buildNewSection(HomeProvider homeProvider) {
     return ListView.builder(
       primary: false,
-      padding: EdgeInsets.symmetric(horizontal: 15.0),
+      padding: const EdgeInsets.symmetric(horizontal: 15.0),
       shrinkWrap: true,
-      physics: NeverScrollableScrollPhysics(),
+      physics: const NeverScrollableScrollPhysics(),
       itemCount: homeProvider.recent.feed?.entry?.length ?? 0,
       itemBuilder: (BuildContext context, int index) {
         Entry entry = homeProvider.recent.feed!.entry![index];
-        // bool pass = false;
-        // for(int i = 0; i < entry.category!.length; i++) {
-        //   if(entry.category![i].label == "19th century") {
-        //     pass = true;
-        //     break;
-        //   }
-        // }
-        // if(pass == false) {
-        //   return SizedBox();
-        // }
+        bool pass = false;
+        if(myEmotion == "neutral" || myEmotion == "happiness") {
+          for(int i = 0; i < entry.category!.length; i++) {
+            String? cate = entry.category![i].label;
+            if(cate == "Literary" ||cate == "Science fiction"
+                 ||cate == "Romance" || cate == "Juvenile & young adult" ||
+                cate == "Business & economics"||cate == "Humorous") {
+              pass = true;
+              break;
+            }
+          }
+        }
+        else if(myEmotion == "sadness" || myEmotion == "fear"||
+            myEmotion == "anger"|| myEmotion == "surprise"||
+            myEmotion == "disgust" || myEmotion == "contempt") {
+            for(int i = 0; i < entry.category!.length; i++) {
+              String? cate = entry.category![i].label;
+              if( cate == "Drama" || cate == "Short stories" ||cate == "Thrillers"
+                  ||cate == "Suspense" ||cate == "Romance" ||
+                  cate == "True story" ||cate == "Mystery & detective" || cate == "Religious") {
+                pass = true;
+                break;
+              }
+            }
+        }else {
+          pass = true;
+        }
+
+
+        if(pass == false) {
+          return const SizedBox();
+        }
         return Padding(
-          padding: EdgeInsets.symmetric(horizontal: 5.0, vertical: 5.0),
+          padding: const EdgeInsets.symmetric(horizontal: 5.0, vertical: 5.0),
           child: BookListItem(
             entry: entry,
           ),

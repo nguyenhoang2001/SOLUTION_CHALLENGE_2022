@@ -30,9 +30,9 @@ class _ThreadMain extends State<ThreadMain>{
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         centerTitle: true,
         backgroundColor: Theme.of(context).primaryColor,
-        automaticallyImplyLeading: false,
         title: const Text(
           'Newsfeed',
           style: TextStyle(

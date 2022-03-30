@@ -10,6 +10,8 @@ import 'package:solution_challenge_2022/views/camera//utilities/key.dart';
 import 'package:solution_challenge_2022/views/camera//youtube/screens/home_screen.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 
+import '../home/home.dart';
+
 class Camera extends StatefulWidget {
   const Camera({Key? key}) : super(key: key);
 
@@ -73,6 +75,7 @@ class _CameraState extends State<Camera> {
         }
       });
       print(emotion);
+      saveEmotion(emotion);
       setState(() {
         isLoading = false;
       });
@@ -87,6 +90,7 @@ class _CameraState extends State<Camera> {
   }
 
   _onAlertButtonsPressed(context, String emotion) {
+
     Alert(
       context: context,
       type: AlertType.success,
@@ -100,7 +104,7 @@ class _CameraState extends State<Camera> {
           ),
           onPressed: () => Navigator.push(context,
               MaterialPageRoute(builder: (context) => HomeScreen(emotion))),
-          color: Color.fromRGBO(0, 179, 134, 1.0),
+          color: Theme.of(context).primaryColor,
         ),
         DialogButton(
           child: Text(
@@ -172,9 +176,10 @@ class _CameraState extends State<Camera> {
           ],
         ),
         floatingActionButton: FloatingActionButton(
+          backgroundColor: Theme.of(context).primaryColor,
           onPressed: getImage,
           tooltip: 'Pick Image',
-          child: Icon(Icons.add_a_photo),
+          child: Icon(Icons.add_a_photo,),
         ),
 //        bottomNavigationBar: BottomNavigationBar(
 //          items: [
@@ -225,7 +230,7 @@ class _CameraState extends State<Camera> {
                   child: Container(
                     width: 150,
                     child: FlatButton(
-                      color: Color(0xFF63FFDA),
+                      color: Theme.of(context).primaryColor,
                       textColor: Colors.black,
                       disabledColor: Colors.grey,
                       disabledTextColor: Colors.black,
@@ -242,7 +247,7 @@ class _CameraState extends State<Camera> {
                       },
                       child: Text(
                         "Confirm",
-                        style: TextStyle(fontSize: 20.0),
+                        style: TextStyle(fontSize: 20.0,color: Colors.white),
                       ),
                     ),
                   ),
